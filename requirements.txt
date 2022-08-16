@@ -1,0 +1,10 @@
+numpy
+pandas
+albumentations>=0.3.2
+cython
+mmcv-full>=1.3.17
+sklearn
+mmcv
+torch
+torchvision
+pandas
