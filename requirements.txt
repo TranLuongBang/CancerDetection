@@ -8,3 +8,6 @@ mmcv
 torch
 torchvision
 pandas
+pyyaml==5.1
+sahi
+argparse
