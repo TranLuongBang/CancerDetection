@@ -6,7 +6,7 @@ from mmdet.apis import train_detector
 import os.path as osp
 
 def run():
-    cfg = Config.fromfile('./model/3_classes/faster_rcnn_x101_64x4d_fpn_1x_coco.py')
+    cfg = Config.fromfile('./CancerDetection/model/3_classes/faster_rcnn_x101_64x4d_fpn_1x_coco.py')
 
     # Build dataset
     datasets = [build_dataset(cfg.data.train)]
