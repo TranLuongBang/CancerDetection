@@ -1,6 +1,6 @@
 import argparse
 
-from model.dataset.utils import split_data
+from dataset.utils import split_data
 from path_config import PathConfig
 
 pathConfig = PathConfig()
