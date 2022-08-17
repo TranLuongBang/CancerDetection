@@ -1,6 +1,6 @@
 import argparse
 
-from model.dataset.utils import prevent_data_leakage, group_categories
+from dataset.utils import prevent_data_leakage, group_categories
 from path_config import PathConfig
 
 pathConfig = PathConfig()
