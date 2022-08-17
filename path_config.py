@@ -4,10 +4,10 @@ from pathlib import Path
 class PathConfig:
 
     def __init__(self):
-        self.data_path = Path('./content/driver/MyDrive')
+        self.data_path = Path('/content/drive/MyDrive')
 
         self.image_folder_path = self.data_path / "dataset" / "images"
-        self.annotation_folder_path = self.data_path / "dataset" / "annotation"
+        self.annotation_folder_path = self.data_path / "dataset" / "annotations"
 
         self.all_images_path = self.image_folder_path / "all_images"
         self.all_annotation_path = self.annotation_folder_path / "annotations.json"
