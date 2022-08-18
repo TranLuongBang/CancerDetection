@@ -1,7 +1,7 @@
 import argparse
 
 from sahi.slicing import slice_coco
-
+from pathlib import Path
 from path_config import PathConfig
 
 pathConfig = PathConfig()
@@ -13,10 +13,12 @@ def slice_data(parser) -> None:
 
     if num_classes == 2:
         data_root = pathConfig.data_2_classes
-        input_annotation_path = pathConfig.train_annotation_2_classes_path
+        train_input_annotation_path = pathConfig.train_annotation_2_classes_path
+        val_input_annotation_path = pathConfig.val_annotation_2_classes_path
     if num_classes == 3:
         data_root = pathConfig.data_3_classes
-        input_annotation_path = pathConfig.train_annotation_3_classes_path
+        train_input_annotation_path = pathConfig.train_annotation_3_classes_path
+        val_input_annotation_path = pathConfig.val_annotation_3_classes_path
 
     if image_size == 256:
         output_image_path = data_root / pathConfig.size_256_image_path
@@ -34,11 +36,15 @@ def slice_data(parser) -> None:
         output_image_path = data_root / pathConfig.size_1024_image_path
         output_annotation_path = data_root / pathConfig.size_1024_annotation_path
 
+    Path(output_annotation_path).parent.mkdir(parents=True, exist_ok=True)
+    Path(output_image_path / "train_images").parent.mkdir(parents=True, exist_ok=True)
+    Path(output_image_path / "val_images").parent.mkdir(parents=True, exist_ok=True)
+
     # slice train dataset
     coco_dict, coco_path = slice_coco(
-        coco_annotation_file_path=input_annotation_path,
+        coco_annotation_file_path=train_input_annotation_path,
         image_dir=pathConfig.train_image_path,
-        output_coco_annotation_file_name=output_annotation_path / "train_annotations.json",
+        output_coco_annotation_file_name=str(output_annotation_path / "train_annotations"),
         ignore_negative_samples=True,
         output_dir=output_image_path / "train_images",
         slice_height=image_size,
@@ -50,9 +56,9 @@ def slice_data(parser) -> None:
 
     # slice val dataset
     coco_dict, coco_path = slice_coco(
-        coco_annotation_file_path=pathConfig.train_annotation_path,
-        image_dir=pathConfig.train_image_path,
-        output_coco_annotation_file_name=output_annotation_path / "val_annotations.json",
+        coco_annotation_file_path=val_input_annotation_path,
+        image_dir=pathConfig.val_image_path,
+        output_coco_annotation_file_name=str(output_annotation_path / "val_annotations"),
         ignore_negative_samples=True,
         output_dir=output_image_path / "val_images",
         slice_height=image_size,
@@ -65,7 +71,7 @@ def slice_data(parser) -> None:
 
 def parse_opt(known=False):
     parser = argparse.ArgumentParser()
-    parser.add_argument('--image-size', required=True, type=int, default=640, help='train, val image size (pixels)')
+    parser.add_argument('--image_size', required=True, type=int, default=640, help='train, val image size (pixels)')
     parser.add_argument('--num_classes', required=True, type=int, default=2, help='number of classes: 2 or 3')
 
     return parser.parse_known_args()[0] if known else parser.parse_args()
