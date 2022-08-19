@@ -1,7 +1,7 @@
 import argparse
 
 from sahi.slicing import slice_coco
-from pathlib import Path
+import os
 from path_config import PathConfig
 
 pathConfig = PathConfig()
@@ -36,9 +36,9 @@ def slice_data(parser) -> None:
         output_image_path = data_root / pathConfig.size_1024_image_path
         output_annotation_path = data_root / pathConfig.size_1024_annotation_path
 
-    Path(output_annotation_path).parent.mkdir(parents=True, exist_ok=True)
-    Path(output_image_path / "train_images").parent.mkdir(parents=True, exist_ok=True)
-    Path(output_image_path / "val_images").parent.mkdir(parents=True, exist_ok=True)
+    os.makedirs(output_annotation_path, exist_ok=True)
+    os.makedirs(output_image_path / "train_images", exist_ok=True)
+    os.makedirs(output_image_path / "val_images", exist_ok=True)
 
     # slice train dataset
     coco_dict, coco_path = slice_coco(
