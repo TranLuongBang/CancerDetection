@@ -126,13 +126,13 @@ model = dict(
             nms=dict(type='nms', iou_threshold=0.5),
             max_per_img=100)))
 dataset_type = 'CocoDataset'
-data_root = '/content/drive/MyDrive/data_3_classes/size_256/images'
+data_root = '/content/drive/MyDrive/data_3_classes/size_512/images'
 img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
 train_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(type='LoadAnnotations', with_bbox=True),
-    dict(type='Resize', img_scale=(256, 256), keep_ratio=True),
+    dict(type='Resize', img_scale=(512, 512), keep_ratio=True),
     dict(type='RandomFlip', flip_ratio=0.5),
     dict(
         type='Normalize',
@@ -147,7 +147,7 @@ test_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(
         type='MultiScaleFlipAug',
-        img_scale=(256, 256),
+        img_scale=(512, 512),
         flip=False,
         transforms=[
             dict(type='Resize', keep_ratio=True),
@@ -168,26 +168,26 @@ data = dict(
     train=dict(
         type='CocoDataset',
         ann_file=
-        '/content/drive/MyDrive/data_3_classes/size_256/annotations/train_annotations_coco.json',
+        '/content/drive/MyDrive/data_3_classes/size_512/annotations/train_annotations_coco.json',
         img_prefix='train_images',
         pipeline=train_pipeline,
-        data_root='/content/drive/MyDrive/data_3_classes/size_256/images',
+        data_root='/content/drive/MyDrive/data_3_classes/size_512/images',
         classes=('normal', 'cancer', 'suspected_cancer')),
     val=dict(
         type='CocoDataset',
         ann_file=
-        '/content/drive/MyDrive/data_3_classes/size_256/annotations/val_annotations_coco.json',
+        '/content/drive/MyDrive/data_3_classes/size_512/annotations/val_annotations_coco.json',
         img_prefix='val_images',
         pipeline=test_pipeline,
-        data_root='/content/drive/MyDrive/data_3_classes/size_256/images',
+        data_root='/content/drive/MyDrive/data_3_classes/size_512/images',
         classes=('normal', 'cancer', 'suspected_cancer')),
     test=dict(
         type='CocoDataset',
         ann_file=
-        '/content/drive/MyDrive/data_3_classes/size_256/annotations/val_annotations_coco.json',
+        '/content/drive/MyDrive/data_3_classes/size_512/annotations/val_annotations_coco.json',
         img_prefix='val_images',
         pipeline=test_pipeline,
-        data_root='/content/drive/MyDrive/data_3_classes/size_256/images',
+        data_root='/content/drive/MyDrive/data_3_classes/size_512/images',
         classes=('normal', 'cancer', 'suspected_cancer')))
 evaluation = dict(interval=1, metric='bbox')
 optimizer = dict(type='SGD', lr=0.0025, momentum=0.9, weight_decay=0.0001)
@@ -211,7 +211,7 @@ log_config = dict(
                 name='Faster_RCNN',
                 id='Faster_RCNN',
                 save_code=True,
-                tags=["3", "256"]
+                tags=["3", "512"]
             ),
             interval=10,
             log_checkpoint=True,
