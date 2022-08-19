@@ -37,7 +37,7 @@ def train_model(opt):
 def parse_opt(known=False):
     parser = argparse.ArgumentParser()
     parser.add_argument('--method', required=True, type=str, default='Faster_RCNN', help='Method to train model')
-    parser.add_argument('--image_size', required=True, type=int, default=640, help='train, val image size (pixels)')
+    parser.add_argument('--img_size', required=True, type=int, default=640, help='train, val image size (pixels)')
     parser.add_argument('--num_classes', required=True, type=int, default=2, help='number of classes: 2 or 3')
 
     return parser.parse_known_args()[0] if known else parser.parse_args()
