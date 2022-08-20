@@ -168,6 +168,7 @@ def split_data(
         else:
             train_annotations[key] = value
             val_annotations[key] = value
+            test_annotations[key] = value
 
     write_data(data=train_annotations, save_path=train_annotation_path)
     write_data(data=val_annotations, save_path=val_annotation_path)
