@@ -91,8 +91,8 @@ log_config = dict(
             init_kwargs=dict(
                 project='CancerDetection',
                 entity='thesisltran',
-                name='VarifocalNet',
-                id='VarifocalNet',
+                name='VarifocalNet_256',
+                id='VarifocalNet_256',
                 notes='vfnet_r101_fpn_mdconv_c3-c5_mstrain_2x_coco',
                 save_code=True,
                 tags=["3", "256", "VarifocalNet"]
@@ -105,7 +105,7 @@ log_config = dict(
 custom_hooks = [dict(type='NumClassCheckHook')]
 dist_params = dict(backend='nccl')
 log_level = 'INFO'
-load_from = '/content/mmdetection/checkpoints/vfnet_r101_fpn_mdconv_c3-c5_mstrain_2x_coco.pth'
+load_from = '/content/drive/MyDrive/checkpoints/vfnet_r101_fpn_mdconv_c3-c5_mstrain_2x_coco.pth'
 resume_from = None
 workflow = [('train', 1)]
 opencv_num_threads = 0
