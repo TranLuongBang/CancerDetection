@@ -13,7 +13,16 @@ def get_train_config(opt):
     if opt.num_classes == 3:
         if opt.img_size == 256:
             if opt.method == "Faster_RCNN":
-                return Config.fromfile('./CancerDetection/model/model_3_classes/256_faster_rcnn_x101_64x4d_fpn_1x_coco.py')
+                return Config.fromfile('/content/CancerDetection/model/model_3_classes/256_faster_rcnn_x101_64x4d_fpn_1x_coco.py')
+        if opt.img_size == 512:
+            if opt.method == "Faster_RCNN":
+                return Config.fromfile('/content/CancerDetection/model/model_3_classes/512_faster_rcnn_x101_64x4d_fpn_1x_coco.py')
+        if opt.img_size == 640:
+            if opt.method == "Faster_RCNN":
+                return Config.fromfile('/content/CancerDetection/model/model_3_classes/640_faster_rcnn_x101_64x4d_fpn_1x_coco.py')
+        if opt.img_size == 1024:
+            if opt.method == "Faster_RCNN":
+                return Config.fromfile('/content/CancerDetection/model/model_3_classes/1024_faster_rcnn_x101_64x4d_fpn_1x_coco.py')
 
 
 def train_model(opt):
