@@ -14,16 +14,79 @@ def get_train_config(opt):
         if opt.img_size == 256:
             if opt.method == "Faster_RCNN":
                 return Config.fromfile('/content/CancerDetection/model/model_3_classes/256_faster_rcnn_x101_64x4d_fpn_1x_coco.py')
+            if opt.method == "RetinaNet":
+                return Config.fromfile('/content/CancerDetection/model/model_3_classes/256_retinanet_x101_64x4d_fpn_1x_coco.py')
+            if opt.method == "VFNet":
+                return Config.fromfile('/content/CancerDetection/model/model_3_classes/256_vfnet_r101_fpn_mdconv_c3-c5_mstrain_2x_coco.py')
+
         if opt.img_size == 512:
             if opt.method == "Faster_RCNN":
                 return Config.fromfile('/content/CancerDetection/model/model_3_classes/512_faster_rcnn_x101_64x4d_fpn_1x_coco.py')
+            if opt.method == "RetinaNet":
+                return Config.fromfile(
+                    '/content/CancerDetection/model/model_3_classes/512_retinanet_x101_64x4d_fpn_1x_coco.py')
+            if opt.method == "VFNet":
+                return Config.fromfile(
+                    '/content/CancerDetection/model/model_3_classes/512_vfnet_r101_fpn_mdconv_c3-c5_mstrain_2x_coco.py')
+
         if opt.img_size == 640:
             if opt.method == "Faster_RCNN":
                 return Config.fromfile('/content/CancerDetection/model/model_3_classes/640_faster_rcnn_x101_64x4d_fpn_1x_coco.py')
+            if opt.method == "RetinaNet":
+                return Config.fromfile(
+                    '/content/CancerDetection/model/model_3_classes/640_retinanet_x101_64x4d_fpn_1x_coco.py')
+            if opt.method == "VFNet":
+                return Config.fromfile(
+                    '/content/CancerDetection/model/model_3_classes/640_vfnet_r101_fpn_mdconv_c3-c5_mstrain_2x_coco.py')
+
         if opt.img_size == 1024:
             if opt.method == "Faster_RCNN":
                 return Config.fromfile('/content/CancerDetection/model/model_3_classes/1024_faster_rcnn_x101_64x4d_fpn_1x_coco.py')
+            if opt.method == "RetinaNet":
+                return Config.fromfile(
+                    '/content/CancerDetection/model/model_3_classes/1024_retinanet_x101_64x4d_fpn_1x_coco.py')
+            if opt.method == "VFNet":
+                return Config.fromfile(
+                    '/content/CancerDetection/model/model_3_classes/1024_vfnet_r101_fpn_mdconv_c3-c5_mstrain_2x_coco.py')
 
+    if opt.num_classes == 2:
+        if opt.img_size == 256:
+            if opt.method == "Faster_RCNN":
+                return Config.fromfile('/content/CancerDetection/model/model_2_classes/256_faster_rcnn_x101_64x4d_fpn_1x_coco.py')
+            if opt.method == "RetinaNet":
+                return Config.fromfile('/content/CancerDetection/model/model_2_classes/256_retinanet_x101_64x4d_fpn_1x_coco.py')
+            if opt.method == "VFNet":
+                return Config.fromfile('/content/CancerDetection/model/model_2_classes/256_vfnet_r101_fpn_mdconv_c3-c5_mstrain_2x_coco.py')
+
+        if opt.img_size == 512:
+            if opt.method == "Faster_RCNN":
+                return Config.fromfile('/content/CancerDetection/model/model_2_classes/512_faster_rcnn_x101_64x4d_fpn_1x_coco.py')
+            if opt.method == "RetinaNet":
+                return Config.fromfile(
+                    '/content/CancerDetection/model/model_2_classes/512_retinanet_x101_64x4d_fpn_1x_coco.py')
+            if opt.method == "VFNet":
+                return Config.fromfile(
+                    '/content/CancerDetection/model/model_2_classes/512_vfnet_r101_fpn_mdconv_c3-c5_mstrain_2x_coco.py')
+
+        if opt.img_size == 640:
+            if opt.method == "Faster_RCNN":
+                return Config.fromfile('/content/CancerDetection/model/model_2_classes/640_faster_rcnn_x101_64x4d_fpn_1x_coco.py')
+            if opt.method == "RetinaNet":
+                return Config.fromfile(
+                    '/content/CancerDetection/model/model_2_classes/640_retinanet_x101_64x4d_fpn_1x_coco.py')
+            if opt.method == "VFNet":
+                return Config.fromfile(
+                    '/content/CancerDetection/model/model_2_classes/640_vfnet_r101_fpn_mdconv_c3-c5_mstrain_2x_coco.py')
+
+        if opt.img_size == 1024:
+            if opt.method == "Faster_RCNN":
+                return Config.fromfile('/content/CancerDetection/model/model_2_classes/1024_faster_rcnn_x101_64x4d_fpn_1x_coco.py')
+            if opt.method == "RetinaNet":
+                return Config.fromfile(
+                    '/content/CancerDetection/model/model_2_classes/1024_retinanet_x101_64x4d_fpn_1x_coco.py')
+            if opt.method == "VFNet":
+                return Config.fromfile(
+                    '/content/CancerDetection/model/model_2_classes/1024_vfnet_r101_fpn_mdconv_c3-c5_mstrain_2x_coco.py')
 
 def train_model(opt):
     cfg = get_train_config(opt)
