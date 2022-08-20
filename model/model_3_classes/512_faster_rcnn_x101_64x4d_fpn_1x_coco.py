@@ -207,11 +207,11 @@ log_config = dict(
         dict(
             type='MMDetWandbHook',
             init_kwargs=dict(
-                project='Cancer_Detection',
+                project='CancerDetection',
                 name='Faster_RCNN',
                 id='Faster_RCNN',
                 save_code=True,
-                tags=["3", "512"]
+                tags=["3", "512", "Faster_RCNN"]
             ),
             interval=10,
             log_checkpoint=True,
