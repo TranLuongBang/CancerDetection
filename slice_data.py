@@ -23,18 +23,22 @@ def slice_data(parser) -> None:
     if image_size == 256:
         output_image_path = data_root / pathConfig.size_256_image_path
         output_annotation_path = data_root / pathConfig.size_256_annotation_path
+        overlap_ratio = 0.2
 
     if image_size == 512:
         output_image_path = data_root / pathConfig.size_512_image_path
         output_annotation_path = data_root / pathConfig.size_512_annotation_path
+        overlap_ratio = 0.1
 
     if image_size == 640:
         output_image_path = data_root / pathConfig.size_640_image_path
         output_annotation_path = data_root / pathConfig.size_640_annotation_path
+        overlap_ratio = 0.75
 
     if image_size == 1024:
         output_image_path = data_root / pathConfig.size_1024_image_path
         output_annotation_path = data_root / pathConfig.size_1024_annotation_path
+        overlap_ratio = 0.05
 
     os.makedirs(output_annotation_path, exist_ok=True)
     os.makedirs(output_image_path / "train_images", exist_ok=True)
@@ -49,8 +53,8 @@ def slice_data(parser) -> None:
         output_dir=output_image_path / "train_images",
         slice_height=image_size,
         slice_width=image_size,
-        overlap_height_ratio=0.2,
-        overlap_width_ratio=0.2,
+        overlap_height_ratio=overlap_ratio,
+        overlap_width_ratio=overlap_ratio,
         min_area_ratio=0.9,
     )
 
@@ -63,8 +67,8 @@ def slice_data(parser) -> None:
         output_dir=output_image_path / "val_images",
         slice_height=image_size,
         slice_width=image_size,
-        overlap_height_ratio=0.2,
-        overlap_width_ratio=0.2,
+        overlap_height_ratio=overlap_ratio,
+        overlap_width_ratio=overlap_ratio,
         min_area_ratio=0.9,
     )
 
