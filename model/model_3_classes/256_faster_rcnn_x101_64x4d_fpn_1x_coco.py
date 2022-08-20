@@ -208,8 +208,8 @@ log_config = dict(
             type='MMDetWandbHook',
             init_kwargs=dict(
                 project='CancerDetection',
-                name='Faster_RCNN_256',
-                id='Faster_RCNN_256',
+                name='Faster_RCNN_3_256',
+                id='Faster_RCNN_3_256',
                 save_code=True,
                 tags=["3", "256", "Faster_RCNN"]
             ),
