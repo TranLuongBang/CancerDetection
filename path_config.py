@@ -32,6 +32,15 @@ class PathConfig:
 
         self.data_3_classes = self.data_path / "data_3_classes"
 
+        self.size_224_image_path = Path("size_224/images")
+        self.size_224_annotation_path = Path("size_224/annotations")
+        self.size_224_train_image_path = self.size_224_image_path / "train_images"
+        self.size_224_test_image_path = self.size_224_image_path / "test_images"
+        self.size_224_val_image_path = self.size_224_image_path / "val_images"
+        self.size_224_train_annotation_path = self.size_224_annotation_path / "train_annotations.json"
+        self.size_224_test_annotation_path = self.size_224_annotation_path / "test_annotations.json"
+        self.size_224_val_annotation_path = self.size_224_annotation_path / "val_annotations.json"
+
         self.size_256_image_path = Path("size_256/images")
         self.size_256_annotation_path = Path("size_256/annotations")
         self.size_256_train_image_path = self.size_256_image_path / "train_images"
