@@ -21,7 +21,7 @@ def get_faster_rcnn_config(
     cfg = Config.fromfile('mmdetection/configs/faster_rcnn/faster_rcnn_r101_fpn_1x_coco.py')
 
     cfg.dataset_type = 'CocoDataset'
-    cfg.classes = ('normal', 'cancer', 'suspected_cancer')
+    cfg.classes = classes
     cfg.data_root = data_config['data_root']
 
     # modify num classes of the model in box head
