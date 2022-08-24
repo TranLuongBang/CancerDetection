@@ -10,6 +10,7 @@ from mmdet.models import build_detector
 from dataset.data_config import data_configs
 from model.model_2_classes.Faster_RCNN import get_faster_rcnn_config
 from model.model_2_classes.RetinaNet import get_retinanet_config
+from model.model_2_classes.VFNet import get_vfnet_config
 
 
 def get_train_config(opt):
@@ -36,9 +37,14 @@ def get_train_config(opt):
                     pretrained=opt.pretrained
                 )
             if opt.method == "VFNet":
-                return Config.fromfile(
-                    '/content/CancerDetection/model/model_2_classes/256_vfnet_r101_fpn_mdconv_c3-c5_mstrain_2x_coco.py')
-
+                return get_vfnet_config(
+                    data_config=data_cfg,
+                    num_classes=opt.num_classes,
+                    img_size=opt.img_size,
+                    max_epochs=opt.epochs,
+                    lr=opt.lr,
+                    pretrained=opt.pretrained
+                )
 
 def train_model(opt):
     cfg = get_train_config(opt)
