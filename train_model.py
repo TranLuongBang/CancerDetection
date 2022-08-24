@@ -9,6 +9,7 @@ from mmdet.models import build_detector
 
 from dataset.data_config import data_configs
 from model.model_2_classes.Faster_RCNN import get_faster_rcnn_config
+from model.model_2_classes.RetinaNet import get_retinanet_config
 
 
 def get_train_config(opt):
@@ -26,8 +27,14 @@ def get_train_config(opt):
                     pretrained=opt.pretrained
                 )
             if opt.method == "RetinaNet":
-                return Config.fromfile(
-                    '/content/CancerDetection/model/model_2_classes/256_retinanet_x101_64x4d_fpn_1x_coco.py')
+                return get_retinanet_config(
+                    data_config=data_cfg,
+                    num_classes=opt.num_classes,
+                    img_size=opt.img_size,
+                    max_epochs=opt.epochs,
+                    lr=opt.lr,
+                    pretrained=opt.pretrained
+                )
             if opt.method == "VFNet":
                 return Config.fromfile(
                     '/content/CancerDetection/model/model_2_classes/256_vfnet_r101_fpn_mdconv_c3-c5_mstrain_2x_coco.py')
@@ -48,7 +55,7 @@ def train_model(opt):
 
     # Create work_dir
     mmcv.mkdir_or_exist(osp.abspath(cfg.work_dir))
-    cfg.dump(osp.join(cfg.work_dir, 'faster_rcnn_x101_64x4d_fpn_1x_coco.py'))
+    cfg.dump(osp.join(cfg.work_dir, opt.method + '.py'))
 
     train_detector(model, datasets, cfg, distributed=False, validate=True)
 
