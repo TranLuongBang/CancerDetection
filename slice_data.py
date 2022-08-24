@@ -1,7 +1,8 @@
 import argparse
+import os
 
 from sahi.slicing import slice_coco
-import os
+
 from path_config import PathConfig
 
 pathConfig = PathConfig()
@@ -19,6 +20,11 @@ def slice_data(parser) -> None:
         data_root = pathConfig.data_3_classes
         train_input_annotation_path = pathConfig.train_annotation_3_classes_path
         val_input_annotation_path = pathConfig.val_annotation_3_classes_path
+
+    if image_size == 224:
+        output_image_path = data_root / pathConfig.size_224_image_path
+        output_annotation_path = data_root / pathConfig.size_224_annotation_path
+        overlap_ratio = 0.2
 
     if image_size == 256:
         output_image_path = data_root / pathConfig.size_256_image_path
