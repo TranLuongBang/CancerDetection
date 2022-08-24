@@ -1,15 +1,9 @@
 albumentations>=0.3.2
 argparse
-cython
 fiftyone
 numpy
-mmcv-full>=1.3.17
-mmcv
 mmdet
 pandas
-pyyaml==5.1
 pytest-shutil
 sahi
 wandb
-torch==1.9.0
-torchvision==0.10.0
