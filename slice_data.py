@@ -39,7 +39,7 @@ def slice_data(parser) -> None:
     if image_size == 640:
         output_image_path = data_root / pathConfig.size_640_image_path
         output_annotation_path = data_root / pathConfig.size_640_annotation_path
-        overlap_ratio = 0.75
+        overlap_ratio = 0.15
 
     if image_size == 1024:
         output_image_path = data_root / pathConfig.size_1024_image_path
