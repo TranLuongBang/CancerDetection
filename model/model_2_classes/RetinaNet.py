@@ -18,7 +18,7 @@ def get_retinanet_config(
     if num_classes == 3:
         classes = ['normal', 'cancer', 'suspected_cancer']
 
-    cfg = Config.fromfile('/content/mmdetection/configs/retinanet/retinanet_r101_fpn_1x_coco.py ')
+    cfg = Config.fromfile('/content/mmdetection/configs/retinanet/retinanet_r101_fpn_1x_coco.py')
 
     cfg.dataset_type = 'CocoDataset'
     cfg.classes = classes
