@@ -1,4 +1,4 @@
-from plistlib import Dict
+from typing import Dict
 
 from mmdet.apis import set_random_seed
 from pathlib import Path
@@ -18,7 +18,7 @@ def get_faster_rcnn_config(
     if num_classes == 3:
         classes = ['normal', 'cancer', 'suspected_cancer']
 
-    cfg = Config.fromfile('mmdetection/configs/faster_rcnn/faster_rcnn_r101_fpn_1x_coco.py')
+    cfg = Config.fromfile('/content/mmdetection/configs/faster_rcnn/faster_rcnn_r101_fpn_1x_coco.py')
 
     cfg.dataset_type = 'CocoDataset'
     cfg.classes = classes
@@ -79,10 +79,11 @@ def get_faster_rcnn_config(
     cfg.log_config.hooks = [
         dict(type='TextLoggerHook'),
         dict(type='MMDetWandbHook',
-             init_kwargs={'project': 'MMDetection-tutorial',
-                          'name': 'FaastCNN_1',
-                          'id': 'FaastCNN_1',
-                          'save_code': True
+             init_kwargs={'project': 'Cancer_Detection',
+                          'name': 'Faster_RCNN_' +str(num_classes)+ "_" + str(img_size),
+                          'id': 'Faster_RCNN_' +str(num_classes)+ "_" + str(img_size),
+                          'save_code': True,
+                          'tags':  [str(num_classes), str(img_size), "Faster_RCNN"]
                           },
              interval=10,
              log_checkpoint=True,
