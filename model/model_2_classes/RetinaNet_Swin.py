@@ -82,10 +82,10 @@ def get_retinanet_swin_config(
         dict(type='TextLoggerHook'),
         dict(type='MMDetWandbHook',
              init_kwargs={'project': 'Cancer_Detection',
-                          'name': 'RetinaNet_' + str(num_classes) + "_" + str(img_size) + "_" + str(pretrained),
-                          'id': 'RetinaNet_' + str(num_classes) + "_" + str(img_size) + "_" + str(pretrained),
+                          'name': 'RetinaNet_Swin' + str(num_classes) + "_" + str(img_size) + "_" + str(pretrained),
+                          'id': 'RetinaNet_Swin' + str(num_classes) + "_" + str(img_size) + "_" + str(pretrained),
                           'save_code': True,
-                          'tags': [str(num_classes), str(img_size), "RetinaNet", str(pretrained)]
+                          'tags': [str(num_classes), str(img_size), "RetinaNet_Swin", str(pretrained)]
                           },
              interval=10,
              log_checkpoint=True,

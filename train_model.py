@@ -10,6 +10,7 @@ from mmdet.models import build_detector
 from dataset.data_config import data_configs
 from model.model_2_classes.Faster_RCNN import get_faster_rcnn_config
 from model.model_2_classes.RetinaNet import get_retinanet_config
+from model.model_2_classes.RetinaNet_Swin import get_retinanet_swin_config
 from model.model_2_classes.VFNet import get_vfnet_config
 
 
@@ -46,7 +47,7 @@ def get_train_config(opt):
                     pretrained=opt.pretrained
                 )
             if opt.method == "RetinaNet_Swin":
-                return get_vfnet_config(
+                return get_retinanet_swin_config(
                     data_config=data_cfg,
                     num_classes=opt.num_classes,
                     img_size=opt.img_size,
