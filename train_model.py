@@ -45,6 +45,15 @@ def get_train_config(opt):
                     lr=opt.lr,
                     pretrained=opt.pretrained
                 )
+            if opt.method == "RetinaNet_Swin":
+                return get_vfnet_config(
+                    data_config=data_cfg,
+                    num_classes=opt.num_classes,
+                    img_size=opt.img_size,
+                    max_epochs=opt.epochs,
+                    lr=opt.lr,
+                    pretrained=False
+                )
 
 def train_model(opt):
     cfg = get_train_config(opt)
@@ -56,7 +65,7 @@ def train_model(opt):
     model = build_detector(cfg.model)
     # Add an attribute for visualization convenience
     model.CLASSES = datasets[0].CLASSES
-    if opt.pretrained is False:
+    if opt.pretrained is False or opt.method == 'RetinaNet_Swin':
         model.init_weights()
 
     # Create work_dir
