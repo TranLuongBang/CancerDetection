@@ -25,6 +25,22 @@ model = dict(
         with_cp=False,
         convert_weights=True,
         init_cfg=dict(type='Pretrained', checkpoint=pretrained)),
+    neck=[
+        dict(
+            type='FPN',
+            in_channels=[384, 768, 1536],
+            out_channels=256,
+            start_level=0,
+            add_extra_convs='on_output',
+            num_outs=5),
+        dict(
+            type='DyHead',
+            in_channels=256,
+            out_channels=256,
+            num_blocks=6,
+            # disable zero_init_offset to follow official implementation
+            zero_init_offset=False)
+    ],
     bbox_head=dict(
         type='ATSSHead',
         num_classes=80,
@@ -33,7 +49,7 @@ model = dict(
         feat_channels=256,
         anchor_generator=dict(
             type='AnchorGenerator',
-            ratios=[1.0],
+            ratios=[0.5, 1.0, 1.5, 2.0],
             octave_base_scale=8,
             scales_per_octave=1,
             strides=[8, 16, 32, 64, 128]),
