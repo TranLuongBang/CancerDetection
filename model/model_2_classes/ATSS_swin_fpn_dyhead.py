@@ -5,7 +5,7 @@ from pathlib import Path
 from mmcv import Config
 
 
-def get_retinanet_swin_config(
+def get_atss_swin_dyhead_config(
         data_config: Dict,
         num_classes: int = 2,
         img_size: int = 224,
@@ -18,7 +18,7 @@ def get_retinanet_swin_config(
     if num_classes == 3:
         classes = ['normal', 'cancer', 'suspected_cancer']
 
-    cfg = Config.fromfile('/content/mmdetection/configs/swin/retinanet_swin-t-p4-w7_fpn_1x_coco.py')
+    cfg = Config.fromfile('/content/CancerDetection/model/atss_swin-l-p4-w12_fpn_dyhead_1x_coco.py')
 
     cfg.dataset_type = 'CocoDataset'
     cfg.classes = classes
@@ -82,10 +82,10 @@ def get_retinanet_swin_config(
         dict(type='TextLoggerHook'),
         dict(type='MMDetWandbHook',
              init_kwargs={'project': 'Cancer_Detection',
-                          'name': 'RetinaNet_Swin_' + str(num_classes) + "_" + str(img_size) + "_" + str(pretrained),
-                          'id': 'RetinaNet_Swin_' + str(num_classes) + "_" + str(img_size) + "_" + str(pretrained),
+                          'name': 'ATSS_Swin_DyHead_' + str(num_classes) + "_" + str(img_size) + "_" + str(pretrained),
+                          'id': 'ATSS_Swin_DyHead_' + str(num_classes) + "_" + str(img_size) + "_" + str(pretrained),
                           'save_code': True,
-                          'tags': [str(num_classes), str(img_size), "RetinaNet_Swin", str(pretrained)]
+                          'tags': [str(num_classes), str(img_size), "ATSS_Swin_DyHead", str(pretrained)]
                           },
              interval=10,
              log_checkpoint=True,
