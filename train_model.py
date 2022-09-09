@@ -14,55 +14,55 @@ from model.model_2_classes.RetinaNet import get_retinanet_config
 from model.model_2_classes.RetinaNet_Swin import get_retinanet_swin_config
 from model.model_2_classes.VFNet import get_vfnet_config
 
-def get_train_config(opt):
-    data_cfg = data_configs[str(opt.img_size)][opt.method]
 
-    if opt.num_classes == 2:
-        if opt.method == "Faster_RCNN":
-            return get_faster_rcnn_config(
-                data_config=data_cfg,
-                num_classes=opt.num_classes,
-                img_size=opt.img_size,
-                max_epochs=opt.epochs,
-                lr=opt.lr,
-                pretrained=opt.pretrained
-            )
-        if opt.method == "RetinaNet":
-            return get_retinanet_config(
-                data_config=data_cfg,
-                num_classes=opt.num_classes,
-                img_size=opt.img_size,
-                max_epochs=opt.epochs,
-                lr=opt.lr,
-                pretrained=opt.pretrained
-            )
-        if opt.method == "VFNet":
-            return get_vfnet_config(
-                data_config=data_cfg,
-                num_classes=opt.num_classes,
-                img_size=opt.img_size,
-                max_epochs=opt.epochs,
-                lr=opt.lr,
-                pretrained=opt.pretrained
-            )
-        if opt.method == "RetinaNet_Swin":
-            return get_retinanet_swin_config(
-                data_config=data_cfg,
-                num_classes=opt.num_classes,
-                img_size=opt.img_size,
-                max_epochs=opt.epochs,
-                lr=opt.lr,
-                pretrained=False
-            )
-        if opt.method == "ATSS_Swin_DyHead":
-            return get_atss_swin_dyhead_config(
-                data_config=data_cfg,
-                num_classes=opt.num_classes,
-                img_size=opt.img_size,
-                max_epochs=opt.epochs,
-                lr=opt.lr,
-                pretrained=False
-            )
+def get_train_config(opt):
+    data_cfg = data_configs[str(opt.num_classes)][str(opt.img_size)][opt.method]
+
+    if opt.method == "Faster_RCNN":
+        return get_faster_rcnn_config(
+            data_config=data_cfg,
+            num_classes=opt.num_classes,
+            img_size=opt.img_size,
+            max_epochs=opt.epochs,
+            lr=opt.lr,
+            pretrained=opt.pretrained
+        )
+    if opt.method == "RetinaNet":
+        return get_retinanet_config(
+            data_config=data_cfg,
+            num_classes=opt.num_classes,
+            img_size=opt.img_size,
+            max_epochs=opt.epochs,
+            lr=opt.lr,
+            pretrained=opt.pretrained
+        )
+    if opt.method == "VFNet":
+        return get_vfnet_config(
+            data_config=data_cfg,
+            num_classes=opt.num_classes,
+            img_size=opt.img_size,
+            max_epochs=opt.epochs,
+            lr=opt.lr,
+            pretrained=opt.pretrained
+        )
+    if opt.method == "RetinaNet_Swin":
+        return get_retinanet_swin_config(
+            data_config=data_cfg,
+            num_classes=opt.num_classes,
+            img_size=opt.img_size,
+            max_epochs=opt.epochs,
+            lr=opt.lr,
+            pretrained=False
+        )
+    if opt.method == "ATSS_Swin_DyHead":
+        return get_atss_swin_dyhead_config(
+            data_config=data_cfg,
+            num_classes=opt.num_classes,
+            img_size=opt.img_size,
+            max_epochs=opt.epochs,
+            lr=opt.lr,
+            pretrained=False
+        )
 
 
 def train_model(opt):
@@ -92,7 +92,7 @@ def parse_opt(known=False):
     parser.add_argument('--num_classes', required=True, type=int, default=2, help='number of classes: 2 or 3')
     parser.add_argument('--epochs', type=int, default=12, help='number of epochs training')
     parser.add_argument('--lr', type=float, default=0.0025, help='initial learning rate')
-    parser.add_argument('--pretrained', action="store_false", help='Use pretrained model')
+    parser.add_argument('--pretrained', action="store_true", help='Use pretrained model')
 
     return parser.parse_known_args()[0] if known else parser.parse_args()
 

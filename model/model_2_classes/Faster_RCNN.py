@@ -7,8 +7,8 @@ from mmcv import Config
 
 def get_faster_rcnn_config(
         data_config: Dict,
-        num_classes: int = 2,
-        img_size: int = 224,
+        num_classes: int,
+        img_size: int,
         max_epochs: int = 12,
         lr: float = 0.0025,
         pretrained: bool = True,
