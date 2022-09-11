@@ -45,7 +45,7 @@ def get_retinanet_swin_config(
     # If we need to finetune a model based on a pre-trained detector, we need to
     # use load_from to set the path of checkpoints.
     if pretrained:
-        cfg.load_from = data_config['checkpoint']
+        cfg.load_from = ''
     else:
         cfg.load_from = ''
 
