@@ -11,6 +11,7 @@ from dataset.data_config import data_configs
 from model.model_2_classes.ATSS_swin_fpn_dyhead import get_atss_swin_dyhead_config
 from model.model_2_classes.Faster_RCNN import get_faster_rcnn_config
 from model.model_2_classes.RetinaNet import get_retinanet_config
+from model.model_2_classes.RetinaNet_EfficientNet import get_retinanet_efficientnet_config
 from model.model_2_classes.RetinaNet_Swin import get_retinanet_swin_config
 from model.model_2_classes.Swin_Mask_RCNN import get_swin_mask_rcnn_config
 from model.model_2_classes.VFNet import get_vfnet_config
@@ -48,6 +49,15 @@ def get_train_config(opt):
         )
     if opt.method == "RetinaNet_Swin":
         return get_retinanet_swin_config(
+            data_config=data_cfg,
+            num_classes=opt.num_classes,
+            img_size=opt.img_size,
+            max_epochs=opt.epochs,
+            lr=opt.lr,
+            pretrained=False
+        )
+    if opt.method == "RetinaNet_EfficientNet":
+        return get_retinanet_efficientnet_config(
             data_config=data_cfg,
             num_classes=opt.num_classes,
             img_size=opt.img_size,
