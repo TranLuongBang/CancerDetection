@@ -11,7 +11,9 @@ from dataset.data_config import data_configs
 from model.Faster_RCNN import get_faster_rcnn_config
 from model.RetinaNet import get_retinanet_config
 from model.RetinaNet_EfficientNet import get_retinanet_efficientnet_config
+from model.RetinaNet_EfficientNet_Data_Augmentation import get_retinanet_efficientnet_data_augmentation_config
 from model.RetinaNet_Swin import get_retinanet_swin_config
+from model.RetinaNet_Swin_Data_Augmentation import get_retinanet_swin_data_augmentation_config
 from model.VFNet import get_vfnet_config
 
 
@@ -56,6 +58,24 @@ def get_train_config(opt):
         )
     if opt.method == "RetinaNet_EfficientNet":
         return get_retinanet_efficientnet_config(
+            data_config=data_cfg,
+            num_classes=opt.num_classes,
+            img_size=opt.img_size,
+            max_epochs=opt.epochs,
+            lr=opt.lr,
+            pretrained=False
+        )
+    if opt.method == "RetinaNet_Swin_Data_Aug":
+        return get_retinanet_swin_data_augmentation_config(
+            data_config=data_cfg,
+            num_classes=opt.num_classes,
+            img_size=opt.img_size,
+            max_epochs=opt.epochs,
+            lr=opt.lr,
+            pretrained=False
+        )
+    if opt.method == "RetinaNet_EfficientNet_Data_Aug":
+        return get_retinanet_efficientnet_data_augmentation_config(
             data_config=data_cfg,
             num_classes=opt.num_classes,
             img_size=opt.img_size,
