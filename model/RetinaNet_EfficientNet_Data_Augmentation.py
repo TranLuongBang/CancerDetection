@@ -5,7 +5,7 @@ from pathlib import Path
 from mmcv import Config
 
 
-def get_retinanet_efficientnet_config(
+def get_retinanet_efficientnet_data_augmentation_config(
         data_config: Dict,
         num_classes: int = 2,
         img_size: int = 224,

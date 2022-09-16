@@ -4,7 +4,7 @@ from mmcv import Config
 from mmdet.apis import set_random_seed
 
 
-def get_retinanet_swin_config(
+def get_retinanet_swin_data_augmentation_config(
         data_config: Dict,
         num_classes: int = 2,
         img_size: int = 224,

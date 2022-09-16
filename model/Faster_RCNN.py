@@ -5,7 +5,7 @@ from pathlib import Path
 from mmcv import Config
 
 
-def get_retinanet_config(
+def get_faster_rcnn_config(
         data_config: Dict,
         num_classes: int,
         img_size: int,
@@ -18,14 +18,14 @@ def get_retinanet_config(
     if num_classes == 3:
         classes = ['normal', 'cancer', 'suspected_cancer']
 
-    cfg = Config.fromfile('/content/mmdetection/configs/retinanet/retinanet_r101_fpn_1x_coco.py')
+    cfg = Config.fromfile('/content/mmdetection/configs/faster_rcnn/faster_rcnn_r101_fpn_1x_coco.py')
 
     cfg.dataset_type = 'CocoDataset'
     cfg.classes = classes
     cfg.data_root = data_config['data_root']
 
     # modify num classes of the model in box head
-    cfg.model.bbox_head.num_classes = num_classes
+    cfg.model.roi_head.bbox_head.num_classes = num_classes
 
     cfg.data.train.ann_file = data_config['train_annotation_file']
     cfg.data.train.img_prefix = data_config['train_image_path']
@@ -45,17 +45,15 @@ def get_retinanet_config(
     # If we need to finetune a model based on a pre-trained detector, we need to
     # use load_from to set the path of checkpoints.
     if pretrained:
-        cfg.load_from = data_config['checkpoint']
+        cfg.load_from = '/content/drive/MyDrive/checkpoints/faster_rcnn_r101_fpn_1x_coco.pth'
     else:
         cfg.load_from = ''
 
+    # Set up working dir to save files and logs.
     cfg.work_dir = './tutorial_exps'
 
-    cfg.optimizer.lr = 0.02 / 8
-    cfg.lr_config.warmup = "linear"
-    cfg.lr_config.warmup_iters = 1000
-    cfg.lr_config.warmup_ratio = 0.001
-
+    cfg.optimizer.lr = lr
+    cfg.lr_config.warmup = None
     cfg.log_config.interval = 200
 
     # Change the evaluation metric since we use customized dataset.
@@ -82,10 +80,10 @@ def get_retinanet_config(
         dict(type='TextLoggerHook'),
         dict(type='MMDetWandbHook',
              init_kwargs={'project': 'Cancer_Detection',
-                          'name': 'RetinaNet_' + str(num_classes) + "_" + str(img_size) + "_" + str(pretrained),
-                          'id': 'RetinaNet_' + str(num_classes) + "_" + str(img_size) + "_" + str(pretrained),
+                          'name': 'Faster_RCNN_' +str(num_classes)+ "_" + str(img_size)+"_" + str(pretrained),
+                          'id': 'Faster_RCNN_' +str(num_classes)+ "_" + str(img_size)+"_" + str(pretrained),
                           'save_code': True,
-                          'tags': [str(num_classes), str(img_size), "RetinaNet", str(pretrained)]
+                          'tags':  [str(num_classes), str(img_size), "Faster_RCNN", str(pretrained)]
                           },
              interval=10,
              log_checkpoint=True,
@@ -93,3 +91,5 @@ def get_retinanet_config(
              num_eval_images=50)]
 
     return cfg
+
+
