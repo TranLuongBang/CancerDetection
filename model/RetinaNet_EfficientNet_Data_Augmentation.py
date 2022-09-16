@@ -153,8 +153,8 @@ def get_retinanet_efficientnet_data_augmentation_config(
         dict(type='TextLoggerHook'),
         dict(type='MMDetWandbHook',
              init_kwargs={'project': 'Cancer_Detection',
-                          'name': 'RetinaNet_EfficientNet_' + str(num_classes) + "_" + str(img_size) + "_" + str(pretrained),
-                          'id': 'RetinaNet_EfficientNet_' + str(num_classes) + "_" + str(img_size) + "_" + str(pretrained),
+                          'name': 'RetinaNet_EfficientNet_DataAu_' + str(num_classes) + "_" + str(img_size) + "_" + str(pretrained),
+                          'id': 'RetinaNet_EfficientNet_DataAu_' + str(num_classes) + "_" + str(img_size) + "_" + str(pretrained),
                           'save_code': True,
                           'tags': [str(num_classes), str(img_size), "RetinaNet_EfficientNet", str(pretrained)]
                           },

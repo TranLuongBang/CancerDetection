@@ -23,6 +23,7 @@ def get_retinanet_efficientnet_config(
     cfg.dataset_type = 'CocoDataset'
     cfg.classes = classes
     cfg.data_root = data_config['data_root']
+    cfg.img_size = (img_size, img_size)
 
     # modify num classes of the model in box head
     cfg.model.bbox_head.num_classes = num_classes
@@ -85,8 +86,10 @@ def get_retinanet_efficientnet_config(
         dict(type='TextLoggerHook'),
         dict(type='MMDetWandbHook',
              init_kwargs={'project': 'Cancer_Detection',
-                          'name': 'RetinaNet_EfficientNet_' + str(num_classes) + "_" + str(img_size) + "_" + str(pretrained),
-                          'id': 'RetinaNet_EfficientNet_' + str(num_classes) + "_" + str(img_size) + "_" + str(pretrained),
+                          'name': 'RetinaNet_EfficientNet_' + str(num_classes) + "_" + str(img_size) + "_" + str(
+                              pretrained),
+                          'id': 'RetinaNet_EfficientNet_' + str(num_classes) + "_" + str(img_size) + "_" + str(
+                              pretrained),
                           'save_code': True,
                           'tags': [str(num_classes), str(img_size), "RetinaNet_EfficientNet", str(pretrained)]
                           },
