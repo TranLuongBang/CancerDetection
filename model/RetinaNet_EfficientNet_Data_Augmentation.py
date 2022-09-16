@@ -26,6 +26,7 @@ def get_retinanet_efficientnet_data_augmentation_config(
 
     # modify num classes of the model in box head
     cfg.model.bbox_head.num_classes = num_classes
+    cfg.model.backbone.norm_cfg = cfg.norm_cfg
     cfg.data.samples_per_gpu = 2
     cfg.data.workers_per_gpu = 2
 
