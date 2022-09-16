@@ -97,14 +97,7 @@ def get_retinanet_efficientnet_data_augmentation_config(
     train_pipeline = [
         dict(type='LoadImageFromFile'),
         dict(type='LoadAnnotations', with_bbox=True),
-        dict(
-            type='Resize',
-            img_scale=img_size,
-            ratio_range=(0.8, 1.2),
-            keep_ratio=True),
-        dict(type='RandomCrop', crop_size=img_size),
-        dict(type='RandomFlip', flip_ratio=0.5),
-        dict(type='Pad', size=img_size),
+        dict(type='Pad', size=(img_size, img_size)),
         dict(
             type='Albu',
             transforms=albu_train_transforms,
@@ -126,6 +119,26 @@ def get_retinanet_efficientnet_data_augmentation_config(
         dict(type='Collect', keys=['img', 'gt_bboxes', 'gt_labels']),
     ]
 
+    test_pipeline = [
+    dict(type='LoadImageFromFile'),
+    dict(
+        type='MultiScaleFlipAug',
+        img_scale=(img_size, img_size),
+        flip=False,
+        transforms=[
+            dict(
+                type='Normalize',
+                mean=[123.675, 116.28, 103.53],
+                std=[58.395, 57.12, 57.375],
+                to_rgb=True),
+            dict(type='Pad', size=(img_size, img_size)),
+            dict(type='ImageToTensor', keys=['img']),
+            dict(type='Collect', keys=['img'])
+        ])
+]
+
+    cfg.train_pipeline = train_pipeline
+    cfg.test_pipeline = test_pipeline
     cfg.test_pipeline[1]['img_scale'] = (img_size, img_size)
     #cfg.train_pipeline[2]['img_scale'] = (img_size, img_size)
     cfg.data.train.pipeline = cfg.train_pipeline
