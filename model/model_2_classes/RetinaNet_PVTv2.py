@@ -5,7 +5,7 @@ from pathlib import Path
 from mmcv import Config
 
 
-def get_retinanet_efficientnet_config(
+def get_retinanet_pvt_config(
         data_config: Dict,
         num_classes: int = 2,
         img_size: int = 224,
@@ -18,7 +18,7 @@ def get_retinanet_efficientnet_config(
     if num_classes == 3:
         classes = ['normal', 'cancer', 'suspected_cancer']
 
-    cfg = Config.fromfile('/content/mmdetection/configs/efficientnet/retinanet_effb3_fpn_crop896_8x4_1x_coco.py')
+    cfg = Config.fromfile('/content/mmdetection/configs/pvt/retinanet_pvtv2-b4_fpn_1x_coco.py')
 
     cfg.dataset_type = 'CocoDataset'
     cfg.classes = classes
@@ -26,8 +26,6 @@ def get_retinanet_efficientnet_config(
 
     # modify num classes of the model in box head
     cfg.model.bbox_head.num_classes = num_classes
-    cfg.data.samples_per_gpu = 2
-    cfg.data.workers_per_gpu = 2
 
     cfg.data.train.ann_file = data_config['train_annotation_file']
     cfg.data.train.img_prefix = data_config['train_image_path']
@@ -47,13 +45,13 @@ def get_retinanet_efficientnet_config(
     # If we need to finetune a model based on a pre-trained detector, we need to
     # use load_from to set the path of checkpoints.
     if pretrained:
-        cfg.load_from = 'https://download.openmmlab.com/mmdetection/v2.0/efficientnet/retinanet_effb3_fpn_crop896_8x4_1x_coco/retinanet_effb3_fpn_crop896_8x4_1x_coco_20220322_234806-615a0dda.pth'
+        cfg.load_from = 'https://download.openmmlab.com/mmdetection/v2.0/pvt/retinanet_pvtv2-b4_fpn_1x_coco/retinanet_pvtv2-b4_fpn_1x_coco_20210901_170151-83795c86.pth'
     else:
         cfg.load_from = ''
 
     cfg.work_dir = './tutorial_exps'
 
-    cfg.optimizer.lr = cfg.optimizer.lr / 8
+    cfg.optimizer.lr = 0.02 / 8
     cfg.lr_config.warmup = "linear"
     cfg.lr_config.warmup_iters = 1000
     cfg.lr_config.warmup_ratio = 0.001
@@ -84,10 +82,10 @@ def get_retinanet_efficientnet_config(
         dict(type='TextLoggerHook'),
         dict(type='MMDetWandbHook',
              init_kwargs={'project': 'Cancer_Detection',
-                          'name': 'RetinaNet_EfficientNet_' + str(num_classes) + "_" + str(img_size) + "_" + str(pretrained),
-                          'id': 'RetinaNet_EfficientNet_' + str(num_classes) + "_" + str(img_size) + "_" + str(pretrained),
+                          'name': 'RetinaNet_Swin_' + str(num_classes) + "_" + str(img_size) + "_" + str(pretrained),
+                          'id': 'RetinaNet_Swin_' + str(num_classes) + "_" + str(img_size) + "_" + str(pretrained),
                           'save_code': True,
-                          'tags': [str(num_classes), str(img_size), "RetinaNet_EfficientNet", str(pretrained)]
+                          'tags': [str(num_classes), str(img_size), "RetinaNet_Swin", str(pretrained)]
                           },
              interval=10,
              log_checkpoint=True,
