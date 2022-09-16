@@ -50,7 +50,7 @@ def get_retinanet_swin_data_augmentation_config(
 
     cfg.work_dir = './tutorial_exps'
 
-    cfg.optimizer.lr = 0.02 / 8
+    cfg.optimizer.lr = 0.02 / 80
     cfg.lr_config.warmup = "linear"
     cfg.lr_config.warmup_iters = 1000
     cfg.lr_config.warmup_ratio = 0.001
@@ -84,7 +84,7 @@ def get_retinanet_swin_data_augmentation_config(
             brightness_limit=[0.1, 0.3],
             contrast_limit=[0.1, 0.3],
             p=0.2),
-        dict(type='RandomRotate90', p=0.2),
+        dict(type='RandomRotate90', p=0.3),
         dict(type='Flip', p=0.4),
     ]
     img_norm_cfg = dict(
