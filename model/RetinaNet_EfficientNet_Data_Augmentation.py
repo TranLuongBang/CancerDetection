@@ -149,7 +149,7 @@ def get_retinanet_efficientnet_data_augmentation_config(
         dict(type='Collect', keys=['img', 'gt_bboxes', 'gt_labels']),
     ]
 
-    #cfg.test_pipeline[1]['img_scale'] = (img_size, img_size)
+    cfg.test_pipeline[1]['img_scale'] = (img_size, img_size)
     #cfg.train_pipeline[2]['img_scale'] = (img_size, img_size)
     cfg.data.train.pipeline = cfg.train_pipeline
     cfg.data.test.pipeline = cfg.test_pipeline
