@@ -23,7 +23,6 @@ def get_retinanet_efficientnet_config(
     cfg.dataset_type = 'CocoDataset'
     cfg.classes = classes
     cfg.data_root = data_config['data_root']
-    cfg.img_size = (img_size, img_size)
 
     # modify num classes of the model in box head
     cfg.model.bbox_head.num_classes = num_classes
