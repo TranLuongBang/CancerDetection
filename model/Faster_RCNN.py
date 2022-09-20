@@ -52,7 +52,7 @@ def get_faster_rcnn_config(
     # Set up working dir to save files and logs.
     cfg.work_dir = './tutorial_exps'
 
-    cfg.optimizer.lr = lr
+    cfg.optimizer.lr = cfg.optimizer.lr / 8
     cfg.lr_config.warmup = None
     cfg.log_config.interval = 200
 
@@ -80,10 +80,10 @@ def get_faster_rcnn_config(
         dict(type='TextLoggerHook'),
         dict(type='MMDetWandbHook',
              init_kwargs={'project': 'Cancer_Detection',
-                          'name': 'Faster_RCNN_' +str(num_classes)+ "_" + str(img_size)+"_" + str(pretrained),
-                          'id': 'Faster_RCNN_' +str(num_classes)+ "_" + str(img_size)+"_" + str(pretrained),
+                          'name': 'Faster_RCNN_' + str(num_classes) + "_" + str(img_size) + "_" + str(pretrained),
+                          'id': 'Faster_RCNN_' + str(num_classes) + "_" + str(img_size) + "_" + str(pretrained),
                           'save_code': True,
-                          'tags':  [str(num_classes), str(img_size), "Faster_RCNN", str(pretrained)]
+                          'tags': [str(num_classes), str(img_size), "Faster_RCNN", str(pretrained)]
                           },
              interval=10,
              log_checkpoint=True,
@@ -91,5 +91,3 @@ def get_faster_rcnn_config(
              num_eval_images=50)]
 
     return cfg
-
-

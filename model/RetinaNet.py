@@ -51,7 +51,7 @@ def get_retinanet_config(
 
     cfg.work_dir = './tutorial_exps'
 
-    cfg.optimizer.lr = 0.02 / 8
+    cfg.optimizer.lr = cfg.optimizer.lr / 8
     cfg.lr_config.warmup = "linear"
     cfg.lr_config.warmup_iters = 1000
     cfg.lr_config.warmup_ratio = 0.001
