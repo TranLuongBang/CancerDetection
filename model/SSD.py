@@ -42,6 +42,9 @@ def get_ssd_config(
     cfg.data.test.classes = classes
     cfg.data.test.type = 'CocoDataset'
 
+    cfg.data.samples_per_gpu = 2
+    cfg.data.workers_per_gpu = 2
+
     # If we need to finetune a model based on a pre-trained detector, we need to
     # use load_from to set the path of checkpoints.
     if pretrained:
@@ -52,9 +55,9 @@ def get_ssd_config(
     cfg.work_dir = './tutorial_exps'
 
     cfg.optimizer.lr = cfg.optimizer.lr / 8
-    #cfg.lr_config.warmup = "linear"
-    #cfg.lr_config.warmup_iters = 1000
-    #cfg.lr_config.warmup_ratio = 0.001
+    cfg.lr_config.warmup = "linear"
+    cfg.lr_config.warmup_iters = 1000
+    cfg.lr_config.warmup_ratio = 0.001
     cfg.log_config.interval = 200
 
     # Change the evaluation metric since we use customized dataset.
@@ -71,8 +74,6 @@ def get_ssd_config(
     cfg.gpu_ids = range(1)
     cfg.device = 'cuda'
 
-    cfg.test_pipeline[1]['img_scale'] = (img_size, img_size)
-    cfg.train_pipeline[2]['img_scale'] = (img_size, img_size)
     cfg.data.train.pipeline = cfg.train_pipeline
     cfg.data.test.pipeline = cfg.test_pipeline
     cfg.data.val.pipeline = cfg.test_pipeline
