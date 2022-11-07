@@ -73,7 +73,7 @@ categories of cells. To classify urothelial cells, the Paris system criteria is 
 ![image](https://user-images.githubusercontent.com/18412307/200424561-a71e9227-40f0-4502-b95f-b09741c2ce56.png)
 
 ***Performance on bigger image sizes***
-![image](https://user-images.githubusercontent.com/18412307/200424578-f44531b6-952f-46fa-b457-44c9396e288c.png)
+![image](https://user-images.githubusercontent.com/18412307/200426341-2be4032e-4f7f-4c78-a23a-520999dc5a46.png)
 
 ***The Best Model***
 ![image](https://user-images.githubusercontent.com/18412307/200424597-cc4a63c7-bb1a-45b2-8054-84eed43a4c50.png)
