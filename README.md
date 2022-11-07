@@ -1,4 +1,5 @@
 # Urotherial_Cancer_Cell_Object_Detection
+For more information, please check the presentation.ptxx file
 ### Abstract
 By leveraging the power of deep neural networks, many problems have started
 to be explored based on medical imaging analysis, such as diabetic retinopathy
